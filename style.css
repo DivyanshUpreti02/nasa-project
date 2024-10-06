@@ -1,0 +1,102 @@
+*{
+font-family: poppins;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+.image-container video{
+    object-position: 53% 58%; object-fit: cover;
+    position: relative;
+    left: 142px;
+    top: 10px;
+}
+.dark-on-light .slick-dots li button:focus .slick-dot-icon:before {
+    color: #2B7B88
+}
+
+.dark-on-light .slick-dots li.slick-active button:focus .slick-dot-icon {
+    color: #2B7B88
+}
+
+.dark-on-light .slick-dots li.slick-active button .slick-dot-icon {
+    color: #2B7B88
+}
+
+.dark-on-light .slick-next:focus .slick-next-icon,.dark-on-light .slick-next:focus .slick-prev-icon,.dark-on-light .slick-prev:focus .slick-next-icon,.dark-on-light .slick-prev:focus .slick-prev-icon {
+    color: #2B7B88
+}
+
+.light-on-dark .slick-dots li button:focus .slick-dot-icon:before {
+    color: #55b89a
+}
+
+.light-on-dark .slick-dots li.slick-active button:focus .slick-dot-icon {
+    color: #55b89a
+}
+
+.light-on-dark .slick-dots li.slick-active button .slick-dot-icon {
+    color: #55b89a
+}
+
+.light-on-dark .slick-dots li button .slick-dot-icon {
+    color: #d0d2d3;
+    opacity: unset
+}
+
+.light-on-dark .slick-next .slick-next-icon,.light-on-dark .slick-next .slick-prev-icon,.light-on-dark .slick-prev .slick-next-icon,.light-on-dark .slick-prev .slick-prev-icon {
+    color: white
+}
+
+.light-on-dark .slick-next:focus .slick-next-icon,.light-on-dark .slick-next:focus .slick-prev-icon,.light-on-dark .slick-prev:focus .slick-next-icon,.light-on-dark .slick-prev:focus .slick-prev-icon {
+    color: #55b89a
+}
+
+.slick-dots li.slick-active button .slick-dot-icon:before {
+    font-size: 22px;
+    margin-left: -5px;
+    margin-top: -5px
+}
+
+.slick-prev {
+    left: -30px
+}
+
+.slick-slider {
+    margin-left: 30px;
+    margin-right: 30px
+}
+.leftcontainer{
+    background-color: rgb(40, 36, 36);
+    width:fit-content;
+    height:fit-content;
+    margin-left: 24px;
+    margin-top:10px;
+    border-radius: 10px;
+    padding:20px 0 ;
+    padding-right: 30px;
+}
+.leftcontainer h2.first{
+    font-weight: bold;
+    padding-left: 20px;
+}
+.leftcontainer h2.two{
+    padding-left: 0px;
+    font-weight: bold;
+}
+.leftcontainer ul li{
+    display: flex;
+    list-style:none;
+}
+.leftcontainer ul li h3{
+    display: flex;
+    position: relative;
+    bottom: 10px;
+    list-style:none;
+}
+.leftcontainer ul li{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style:none;
+}
+.one{
+    cursor: pointer;
+}

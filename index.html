@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style type="text/css" data-tag-name="trix-editor">
+        trix-editor {
+            display: block;
+        }
+
+        trix-editor:empty:not(:focus)::before {
+            content: attr(placeholder);
+            color: graytext;
+            cursor: text;
+            pointer-events: none;
+        }
+
+        trix-editor a[contenteditable=false] {
+            cursor: text;
+        }
+
+        trix-editor img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        trix-editor [data-trix-attachment] figcaption textarea {
+            resize: none;
+        }
+
+        trix-editor [data-trix-attachment] figcaption textarea.trix-autoresize-clone {
+            position: absolute;
+            left: -9999px;
+            max-height: 0px;
+        }
+
+        trix-editor [data-trix-attachment] figcaption[data-trix-placeholder]:empty::before {
+            content: attr(data-trix-placeholder);
+            color: graytext;
+        }
+
+        trix-editor [data-trix-cursor-target] {
+            display: inline-block !important;
+            width: 1px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border: none !important;
+        }
+
+        trix-editor [data-trix-cursor-target=left] {
+            vertical-align: top !important;
+            margin-left: -1px !important;
+        }
+
+        trix-editor [data-trix-cursor-target=right] {
+            vertical-align: bottom !important;
+            margin-right: -1px !important;
+        }
+    </style>
+    <style type="text/css" data-tag-name="trix-toolbar">
+        trix-toolbar {
+            display: block;
+        }
+
+        trix-toolbar {
+            white-space: nowrap;
+        }
+
+        trix-toolbar [data-trix-dialog] {
+            display: none;
+        }
+
+        trix-toolbar [data-trix-dialog][data-trix-active] {
+            display: block;
+        }
+
+        trix-toolbar [data-trix-dialog] [data-trix-validate]:invalid {
+            background-color: #ffdddd;
+        }
+    </style>
+    <!-- BEGIN Common HEAD config, used in all layouts >>>>>>>>>>>>>>>>>>>>> -->
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link crossorigin="use-credentials" href="/manifest.json" rel="manifest">
+    <link href="/assets/pwa/vs-icon-48x48-df56b86e3709f108c9c5d239874b20d5a60486af08092f7e7daabede8ac9030e.png"
+        rel="apple-touch-icon" sizes="48x48">
+    <link href="/assets/pwa/vs-icon-60x60-6b9707c2f7732e16cd0b7aa2fc10fbd8a6194743cce4072749467998169fa061.png"
+        rel="apple-touch-icon" sizes="60x60">
+    <link href="/assets/pwa/vs-icon-72x72-723d972ddf376137029f5cb274a546a390d346e0fa01068c4b8850ed4cdd108f.png"
+        rel="apple-touch-icon" sizes="72x72">
+    <link href="/assets/pwa/vs-icon-76x76-b3d7269a00399b747e2949af6f5ba5de4434373bc4664a6c0a72355b7d6c71eb.png"
+        rel="apple-touch-icon" sizes="76x76">
+    <link href="/assets/pwa/vs-icon-120x120-58dbac7b5faf950bf3379417bda7ffcbf439d9fb1959831f6a66f3721292ab9e.png"
+        rel="apple-touch-icon" sizes="120x120">
+    <link href="/assets/pwa/vs-icon-152x152-415ab4177b42eb448c3a8850fd63740d47eb6a81bfb3d3b65ec1bffce0665027.png"
+        rel="apple-touch-icon" sizes="152x152">
+    <link href="/assets/pwa/vs-icon-180x180-68b8a7fac9ac82d6c0b874d1fb5dc08584772f84c44af1ad771ef43581b1a92c.png"
+        rel="apple-touch-icon" sizes="180x180">
+    <link href="/assets/pwa/vs-icon-512x512-74af692cc5c168bce0004e1f2bbe967730c5b636a4d8f648921215032d137f7d.png"
+        rel="apple-touch-icon" sizes="512x512">
+    <link href="/assets/pwa/vs-icon-1024x1024-577cca9f8bbd3314d0d72fdb66289b6203d2b57070b0b44888aca66085659313.png"
+        rel="apple-touch-icon" sizes="1024x1024">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="#222" name="theme-color">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="style3.css">
+    <title>ViewSpace</title>
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token"
+        content="lrsBLzxWaf48p16X4l4EV1-i9xCCY7rHS9wPvDQM3IlV-fmdoRhdTl0PiMrO7JtLJSDbcqp9uQf8khf8H--uaw">
+    <!-- Google Tag Manager -->
+    <script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-MHMTWRN"></script>
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-MHMTWRN');</script>
+    <!-- End Google Tag Manager -->
+
+    <script>
+        // inPwaMode() is now defined here so it can be used early on by the app
+        // Checks if app is running as a PWA (Progressive Web App)
+        function inPwaMode() {
+            onAndroid = navigator.userAgent.toLowerCase().includes("android");
+            if (window.matchMedia('(display-mode: standalone)').matches ||              // For desktops/laptops (Macs & PCs), Chrome/Edge
+                window.matchMedia('(display-mode: fullscreen)').matches && onAndroid || // For Android mobile devices, (Chrome)
+                window.navigator.standalone) {                                          // For iPhone/iPad, (Safari)
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // Returns true if app is on an Interactives page while running as a PWA.
+        // This is useful for a few cases where non-interactive pages load while
+        // running as a PWA. For example, the VS home page loads in PWA mode before
+        // redirecting to the Interactives about page. The home page load shouldn't
+        // register as an inPWA page load in Google Analytics. We are also seeing a
+        // few users with unique setups running playlists (and some other pages) in
+        // fullscreen mode that register as being inPwa mode in GA. We want to ensure
+        // that they don't experience their top nav menus disappearing (as occurs in
+        // Pwa mode). This method supports ensuring that only Interactives pages in
+        // Pwa mode have their top menu (and other sections) hidden.
+        function onPwaInteractivesPages() {
+            onInteractivesPages = document.location.pathname.startsWith('/interactives/');
+            if (inPwaMode() && onInteractivesPages) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // push info to Google Tag Manager. "dataLayer" is provided by gtm_rails
+        // gtm_rails is not loaded if gtm_container_id is blank,
+        //   `config/google_tag_manager.yml` references credentials
+        dataLayer.push({
+            'isLoggedIn': false,
+            'isPWA': onPwaInteractivesPages()
+        }); // Returns true if in Pwa mode and on an Interactives page
+    </script>
+    <!-- END Common HEAD config, used in all layouts <<<<<<<<<<<<<<<<<<<<<< -->
+
+    <link rel="stylesheet"
+        href="/assets/application-e1811272fc8e77f567e0f70115f8aebceb979090aba1b0d3ab6308ada967dc91.css" media="all"
+        data-turbolinks-track="reload">
+
+    <script src="/assets/application-11c0fe75d8e1f4a230f63ede92ff2518820ea3c8374613549dc63e24c833d670.js"
+        data-turbolinks-track="reload"></script>
+    <script src="//afarkas.github.io/lazysizes/lazysizes.min.js" async="async"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <meta content="ViewSpace" property="og:title">
+    <meta content="A free, web-based collection of astronomy and Earth science videos and interactives."
+        property="og:description">
+    <meta
+        content="https://viewspace.org/assets/social-thumbnail-4a26c5971e5259fd830fbd807ae55219387800ad9080637a7d165b3824a311a9.png"
+        property="og:image">
+    <link href="/assets/favicon-ae013ec48f810a42eba6f1419e92d0370660ae7f99c459740552fec1f9cde3b1.ico"
+        rel="shortcut icon">
+    <!-- Custom head content for this page >>>>>>>>>>>> -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/slick.min.css">
+    <link rel="stylesheet"
+        href="//cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/accessible-slick-theme.min.css">
+    <link rel="stylesheet"
+        href="/assets/slick_overrides-38ca3d4bb003a21263f5c4e9e7a7998a85ba790ee1965ab5fa8210496d18d057.css">
+    <script src="//cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/slick.min.js"
+        data-turbolinks-track="reload"></script>
+    <meta content="no-cache" name="turbolinks-cache-control">
+    <!-- / Setting the 'data-turbolinks-track' to 'reload' on these javascript include tags is causing some sort of caching error on -->
+    <!-- / just Firefox browsers which after clicking on the 'Videos' link causes the iframes on the Videos page to load with incorrect -->
+    <!-- / values for their 'src' attribute. However, removing them causes the reccurrence of an issue addressed in OPOVS-476. Putting -->
+    <!-- / in a JS workaround for now on the Videos landing page which involves reassigning the 'src' attributes after document loads. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"
+        data-turbolinks-track="reload"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"
+        data-turbolinks-track="reload"></script>
+    <script src="/assets/home-20241499a43c6d2d1d6ff1e78dd23f272fb5483891caef0ef045591757d5b9e4.js"
+        data-turbolinks-track="reload"></script>
+                                                                
+    <!-- End custom head content for this page <<<<<<<<<<<<<< -->
+    <script type="text/javascript" charset="UTF-8"
+        src="https://maps.googleapis.com/maps-api-v3/api/js/58/7/common.js"></script>
+    <script type="text/javascript" charset="UTF-8"
+        src="https://maps.googleapis.com/maps-api-v3/api/js/58/7/util.js"></script>
+    <script>
+        var data1;
+        fetch('https://data.nasa.gov/resource/b67r-rgxc.json/0').then(response => response.json()).then(data => {
+            console.log(data);
+            console.log(data[0]);
+            data1 = data;
+        });
+    </script>
+</head>
+
+<body data-edit-mode="false">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MHMTWRN" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Vimeo/GTM integration, see https://help.vimeo.com/hc/en-us/articles/115002859607-Integrating-with-Google-Tag-Manager -->
+    <script defer="defer" src="https://extend.vimeocdn.com/ga/94554777.js" type="text/javascript"></script>
+    <header role="banner">
+        <div id="skip_to_content">
+            <a data-turbolinks="false" href="#main-content">Skip to main content</a>
+        </div>
+        <nav aria-labelledby="primary-navigation-header" class="menu navbar navbar-default" role="navigation">
+            <h2 id="primary-navigation-header" class="sr-only">Primary Navigation</h2>
+            <a class="navbar-brand" id="navbar-brand-id" href="/">
+                <span class="sr-only"></span>NEO EXPLORER
+            </a><!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header hide-for-pwa">
+                <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbarCollapsed"
+                    data-toggle="collapse" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarCollapsed">
+                <ul aria-labelledby="primary-navigation-header" role="list"
+                    class="nav navbar-nav navbar-right hide-for-pwa">
+                    <li><a href="/">Home</a></li>
+                    <li class="dropdown">
+                        <button name="button" type="button" aria-expanded="false"
+                            class="btn btn-menu-dropdown dropdown-toggle" data-toggle="dropdown">About</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="<span class=&quot;translation_missing&quot; en.nav.menu_2.sub_menu_1.classes&quot;>Classes</span> missing: title=&quot;translation"
+                                    href="/interactives/unveiling_invisible_universe">About the Interactives</a></li>
+                            <li><a class="<span class=&quot;translation_missing&quot; en.nav.menu_2.sub_menu_2.classes&quot;>Classes</span> missing: title=&quot;translation"
+                                    href="/interactives/unveiling_invisible_universe/forms_of_light">Interactives
+                                    Library</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <button name="button" type="button" aria-expanded="false"
+                            class="btn btn-menu-dropdown dropdown-toggle" data-toggle="dropdown">Objects</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="<span class=&quot;translation_missing&quot; en.nav.menu_3.sub_menu_1.classes&quot;>Classes</span> missing: title=&quot;translation"
+                                    href="/resources/videos">About the Videos</a></li>
+                            <li><a class="<span class=&quot;translation_missing&quot; en.nav.menu_3.sub_menu_2.classes&quot;>Classes</span> missing: title=&quot;translation"
+                                    href="/video_library">Video Library</a></li>
+                            <li><a class="<span class=&quot;translation_missing&quot; en.nav.menu_3.sub_menu_3.classes&quot;>Classes</span> missing: title=&quot;translation"
+                                    href="/playlists/featured">Video Collections</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <button name="button" type="button" aria-expanded="false"
+                            class="btn btn-menu-dropdown dropdown-toggle" data-toggle="dropdown">Resources</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="<span class=&quot;translation_missing&quot; en.nav.menu_4.sub_menu_1.classes&quot;>Classes</span> missing: title=&quot;translation"
+                                    href="/resources/museum_resources">Museum Resources</a></li>
+                            <li><a class="<span class=&quot;translation_missing&quot; en.nav.menu_4.sub_menu_2.classes&quot;>Classes</span> missing: title=&quot;translation"
+                                    href="/resources/exhibit_labels">Exhibit Labels</a></li>
+                            <li><a class="<span class=&quot;translation_missing&quot; en.nav.menu_4.sub_menu_3.classes&quot;>Classes</span> missing: title=&quot;translation"
+                                    href="/support/guide">Setup Guide</a></li>
+                            <li><a class="<span class=&quot;translation_missing&quot; en.nav.menu_4.sub_menu_4.classes&quot;>Classes</span> missing: title=&quot;translation"
+                                    href="/support/message/new">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <script>
+            pwa_hide_html_elements();
+
+            $(document).on('turbolinks:load', function () {
+                setUIForEditMode()         // Maintains edit_mode appearance between individual content update submits/reloads of page
+            })
+
+            function inEditMode() {
+                if (document.getElementById('edit_mode_check_box')) {
+                    return !!document.getElementById('edit_mode_check_box').checked;
+                } else {
+                    return false;
+                }
+            }
+
+            function reloadWithLocale(locale = 'en') {      // Fired after user clicks edit_mode checkbox. Reloads the page with appropriate draft or non-draft locale.
+                var url = new URL(window.location);
+
+                if (inEditMode()) {
+                    // Add edit_mode and draft locale
+                    url.searchParams.append("edit_mode", "true");
+
+                    if (!locale.endsWith("draft")) {
+                        url.searchParams.set("locale", locale + '_draft');
+                    }
+                } else {
+                    // Remove edit_mode and locale
+                    url.searchParams.delete("edit_mode");
+                    url.searchParams.delete("locale");
+                }
+                //Navigate to the updated URL
+                window.location.assign(url);
+            }
+
+            function setUIForEditMode() {               // On page load, update UI for edit mode appearance/functionality
+                if (inEditMode()) {
+                    disableAllLinksOnPage()
+                    initEditableEvents()
+                    turnOnEditModeStyling()
+                }
+            }
+
+            function disableAllLinksOnPage() {         // When in edit mode, links should be inactive so clicking to change their text doesn't load a new page
+                links = document.getElementsByTagName("a")
+                for (i = 0; i < links.length; i++) {
+                    if (links[i].text != 'Save') {                   // Skip the 'Update' content links (they are needed for submit the content changes)
+                        links[i].onclick = function () { return false }    // Make all other links on page inactive
+                        if (links[i].getAttribute('data-method')) {
+                            links[i].setAttribute('data-method', '')      // Needed to inactivate the sign-out link (and any link with a data-method)
+                        }
+                        if (links[i].getAttribute('data-toggle')) {
+                            links[i].setAttribute('data-toggle', '')      // Needed to inactivate the sign-out link (and any link with a data-method)
+                        }
+                    }
+                }
+            }
+
+            function initEditableEvents() {
+                console.debug("initEditableEvents")
+                $('[data-editable]').on('click', toggleEditableArea)
+            }
+
+            function turnOnEditModeStyling() {         // Activates edit mode styling for each editable component. (Currently just highlights on hover).
+                document.body.dataset.editMode = true
+            }
+
+            function showOrHideEditableArea(parent_element_id) {                              // Shows or hides the editable text area and update link
+                // TODO: convert to event response. This doesn't work if there is more than one element on a page from the same i18n key. An event would use the element we clicked on.
+                console.debug("showOrHideEditableArea", { parent_element_id: parent_element_id, this: this })
+                if (!inEditMode()) {
+                    throw new Error('Should only be called when editMode==true')
+                }
+
+                parentEl = document.getElementById(parent_element_id)
+                toggledDisplay = (parentEl.style.display == 'none') ? 'initial' : 'none'
+                // debugger
+                console.debug("showOrHideEditableArea", { parentEl: parentEl, toggledDisplay: toggledDisplay })
+                parentEl.style.display = toggledDisplay
+            }
+
+            // Used by event(s) on editable_elements
+            function toggleEditableArea(event) {                              // Shows or hides the editable text area and update link
+                console.debug("toggleEditableArea", { target: event.target, event: event, this: this })
+                if (!inEditMode()) {
+                    throw new Error('Should only be called when editMode==true')
+                }
+                // debugger
+                event.preventDefault(); //disable normal "click" event
+
+                editableUiElementId = $(this).data('editableUiId');
+                uiElSelector = '#' + jQuery.escapeSelector(editableUiElementId); // escape periods/colons for jQuery selector
+                console.debug("in toggleEditableArea", { toggling: uiElSelector })
+                $(uiElSelector).toggle();
+            }
+
+            function updateContent(key, locale) {                                              // Update YAML file with new content for given key. Load action which handles that.
+                // TODO: convert to event response. This doesn't work if there is more than one element on a page from the same i18n key. An event would use the element we clicked on.
+                var text_area = document.getElementById(key);
+                var updateRequestUrl = new URL(window.location.origin);
+
+                updateRequestUrl.pathname = "/admin/content_files/in_page_content_update";
+                updateRequestUrl.search = window.location.search // Start with existing params (locale, edit_mode, search/filter params)
+                updateRequestUrl.searchParams.append("content", encodeURIComponent(text_area.value));
+                updateRequestUrl.searchParams.append("key", encodeURIComponent(key));
+
+                // window.location.href = window.location.origin + "/admin/content_files/in_page_content_update?content=" + encodeURIComponent(text_area.value) + "&key=" + key + "&edit_mode=" + inEditMode() + "&locale=" + locale
+
+                window.location.assign(updateRequestUrl);
+            }
+        </script>
+
+        <section id="flashMessages">
+
+        </section>
+
+    </header>
+    <main role="main">
+        <script>
+            // Redirects to the interactives home/about page if running as a PWA
+            if (inPwaMode()) {
+                window.location.href = "/interactives/unveiling_invisible_universe"
+            }
+        </script>
+
+        <div class="home-about light-on-dark">
+            <h1 id="main-content" class="sr-only" tabindex="-1">Welcome to ViewSpace</h1>
+            <div class="heroBanner">
+                <h2 id="pages.home.section_1.heading" class="sr-only">Hero Interactive</h2>
+                <div class="bannerGradient"></div>
+                <div class="hero-text-wrapper">
+                    <div class="hidden-xs" id="vsLogo">
+                    </div>
+                    <p>
+
+                    </p>
+                </div>
+                <div class="image-container"><video src="assets/plume-flyby-v008.mp4" muted loop autoplay
+                        width="1227px"></video>
+                </div>
+                <div class="slider-container"></div>
+            </div>
+            <div class="extended_description">
+            </div>
+
+            <div class="leftcontainer">
+                <h2 class="first">SOLAR SYSTEM</h2>
+                <ul>
+                    <li class="one" id="SUN" ><A><img src="BODIES/background/images-removebg-preview.png" alt="" width="50px"></A>
+                        <h3>SUN</h3>
+                    </li>
+                    <li class="two" style="
+                    position: relative; right: 15px;
+                " ><A><img src="BODIES/background/MERCURY-removebg-preview.png" alt=""width="80px"></A>
+                        <h3>MERCURY</h3>
+                    </li>
+                    <li class="three" style="
+                    position: relative; right: 16px;
+                " ><A><img src="BODIES/background/VENUS-removebg-preview.png" alt=""width="80px"></A>
+                        <h3>VENUS</h3>
+                    </li>
+                    <li class="four" ><A><img src="BODIES/background/EARTH-removebg-preview.png" alt=""width="50px"></A>
+                        <h3>EARTH</h3>
+                    </li>
+                    <li class="five" ><A><img src="BODIES/background/MARS-removebg-preview.png" alt=""width="50px"></A>
+                        <h3>MARS</h3>
+                    </li>
+                    <li class="six" ><A><img src="BODIES/background/Jupiter-removebg-preview.png" alt=""width="50px"></A>
+                        <h3>JUPITER</h3>
+                    </li>
+                    <li class="seven" style="
+                    position: relative; right: 14px; 
+                " ><A><img src="BODIES/background/SATURN-removebg-preview.png" alt=""width="80px"></A>
+                        <h3>SATURN</h3>
+                    </li>
+                    <li class="eight" style="position: relative; right:24px"; ><A><img src="BODIES/background/URANUS-removebg-preview.png" alt=""width="100px"></A>
+                        <h3>URANUS</h3>
+                    </li>
+                    <li class="nine" ><A><img src="BODIES/background/neptunE-removebg-preview.png" alt=""width="50px"></A>
+                        <h3>NEPTUNE</h3>
+                    </li>
+                    <li class="ten" style="
+                    position: relative; right: 24px"; ><A><img src="BODIES/background/PLUTO-removebg-preview.png" alt=""width="100px"></A>
+                        <h3>PLUTO</h3>
+                    </li>
+                </ul>
+                &nbsp;
+            <ul>
+            <h2 class="two">ASTEROIDS</h2>
+            <h2 class="two">COMETS</h2>
+            <h2 class="two">SATELLITES</h2>
+        </ul>
+        </div>
+        <script src="script.js"></script>
+</body>
+
+</html>

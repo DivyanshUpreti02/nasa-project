@@ -1,0 +1,61 @@
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Information Example</title>
+    <style>
+        .clickable {
+            color: blue;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        #info {
+            display: none; /* Hidden by default */
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <p id="clickableText" class="clickable">Click me for information about the object!</p>
+    <div id="info"></div>
+
+    <script>
+        // Object containing information
+        const objectInfo = {
+            name: 'Sample Object',
+            type: 'Example Type',
+            description: 'This is a detailed description of the Sample Object, explaining its features and purpose.'
+        };
+
+        // Get the text and info div elements
+        const clickableText = document.getElementById('clickableText');
+        const infoDiv = document.getElementById('info');
+
+        // Define the function to display object information
+        function displayInfo() {
+            // Populate the info div with object details
+            infoDiv.innerHTML = `
+                <strong>Name:</strong> ${objectInfo.name}<br>
+                <strong>Type:</strong> ${objectInfo.type}<br>
+                <strong>Description:</strong> ${objectInfo.description}
+            `;
+            // Toggle visibility
+            if (infoDiv.style.display === 'none') {
+                infoDiv.style.display = 'block';
+            } else {
+                infoDiv.style.display = 'none';
+            }
+        }
+
+        // Add the click event listener
+        clickableText.addEventListener('click', displayInfo);
+    </script>
+
+</body>
+</html>
